@@ -1,0 +1,11 @@
+.contacts {
+  display: flex;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 1040px;
+}
+
+.el {
+  width: calc(25% - 15px);
+}
