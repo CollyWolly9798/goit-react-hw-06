@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const slice = createSlice({
   name: 'filters',
@@ -6,7 +6,7 @@ const slice = createSlice({
     name: '',
   },
   reducers: {
-    changeFilter: (state, action) => {
+    changeFilter: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
   },

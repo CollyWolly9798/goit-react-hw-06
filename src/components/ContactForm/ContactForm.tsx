@@ -1,8 +1,18 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 import css from './ContactForm.module.css';
 import { useDispatch } from 'react-redux';
 import { addContact } from '../../redux/contactsSlice';
+
+interface OrderFormValues {
+  name: string;
+  number: string;
+}
+
+const initialValues: OrderFormValues = {
+  name: '',
+  number: '',
+};
 
 export default function ContactForm() {
   const dispatch = useDispatch();
@@ -14,12 +24,12 @@ export default function ContactForm() {
       .matches(/^\d{3}-\d{2}-\d{2}$/, 'Format: 123-45-67'),
   });
 
-  const handleSubmit = value => {
+  const handleSubmit = (value: OrderFormValues, actions: FormikHelpers<OrderFormValues>) => {
     dispatch(addContact(value));
   };
 
   return (
-    <Formik validationSchema={FeedbackSchema} initialValues={{ name: '', number: '' }} onSubmit={handleSubmit}>
+    <Formik validationSchema={FeedbackSchema} initialValues={initialValues} onSubmit={handleSubmit}>
       <Form className={css.form}>
         <label htmlFor=''>Name</label>
         <Field className={css.field} type='text' name='name' id='' />
